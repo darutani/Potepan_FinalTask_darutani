@@ -46,4 +46,5 @@ class Potepan::SampleController < ApplicationController
 
   def privacy_policy
   end
+
 end
