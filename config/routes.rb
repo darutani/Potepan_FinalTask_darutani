@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :products, only: [:show]
+  #potepanにnamespaceするとページ表示時にエラーとなるためnamespaceせずに記載
+  # resources :products, only: [:show]
 
 mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platform'
   # This line mounts Solidus's routes at the root of your application.
@@ -29,7 +30,7 @@ mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platf
     get :tokushoho,                 to: 'sample#tokushoho'
     get :privacy_policy,            to: 'sample#privacy_policy'
 
-    # resources :products, only: [:show]
+    resources :products, only: [:show, :index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
