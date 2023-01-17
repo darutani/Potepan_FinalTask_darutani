@@ -28,14 +28,13 @@ begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
-  exit 
+  exit
 end
 
 require 'capybara/rspec'
 require 'spree/testing_support/factories'
 
 RSpec.configure do |config|
-
   config.before(:each, type: :system) do
     driven_by :rack_test
   end

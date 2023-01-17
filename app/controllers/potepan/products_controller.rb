@@ -5,5 +5,4 @@ class Potepan::ProductsController < ApplicationController
 
   def index
   end
-  
 end
