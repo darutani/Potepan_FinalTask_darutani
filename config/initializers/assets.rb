@@ -13,6 +13,7 @@ Rails.application.config.assets.version = '1.0'
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
+# CircleCiでのRspecのセグメンテーションエラーの解消のため以下追記
 Rails.application.config.assets.configure do |env|
   env.export_concurrent = false
 end
