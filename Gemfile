@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rails-erd'
   gem 'annotate'
   gem 'rubocop-airbnb'
+  gem 'capybara'
 end
 
 group :development do
