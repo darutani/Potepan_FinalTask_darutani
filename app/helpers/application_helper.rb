@@ -1,6 +1,6 @@
 module ApplicationHelper
   # ページ毎のtitle表示
-  def page_title(page_title="")
+  def page_title(page_title)
     base_title = "BIGBAG Store"
 
     if page_title.empty?
@@ -9,5 +9,4 @@ module ApplicationHelper
       page_title + " - " + base_title
     end
   end
-  
 end
