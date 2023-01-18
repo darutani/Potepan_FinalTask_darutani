@@ -3,6 +3,4 @@ class Potepan::ProductsController < ApplicationController
     @product = Spree::Product.find(params[:id])
   end
 
-  def index
-  end
 end
