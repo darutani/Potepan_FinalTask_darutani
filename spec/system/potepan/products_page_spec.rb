@@ -17,10 +17,24 @@ RSpec.describe "products_page", type: :system do
       image.reload
     end
 
-    # BIGBAGアイコンをクリックして、indexページへ遷移
-    it "BIGBAGアイコンをクリックしてindexページへ遷移すること" do
+    # homeページへ遷移
+    it "BIGBAGアイコンをクリックしてhomeページへ遷移すること" do
       click_on('logo')
-      expect(current_path).to eq potepan_products_path
+      expect(current_path).to eq potepan_path
+    end
+
+    it "navbarのHOMEをクリックしてhomeページへ遷移すること" do
+      within ".navbar-right" do
+        click_on('Home')
+        expect(current_path).to eq potepan_path
+      end
+    end
+
+    it "LightSecitonのHOMEをクリックしてhomeページへ遷移すること" do
+      within ".breadcrumb" do
+        click_on('Home')
+        expect(current_path).to eq potepan_path
+      end
     end
 
     # 商品名を表示
