@@ -1,12 +1,11 @@
 module ApplicationHelper
   # ページ毎のtitle表示
+  BASE_TITLE = "BIGBAG Store".freeze
   def page_title(page_title)
-    base_title = "BIGBAG Store"
-
     if page_title.empty?
-      base_title
+      BASE_TITLE
     else
-      page_title + " - " + base_title
+      page_title + " - " + BASE_TITLE
     end
   end
 end
