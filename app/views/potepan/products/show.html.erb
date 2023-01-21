@@ -30,7 +30,6 @@
           <div class="media-left productSlider">
             <div id="carousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-
                 <% @product.images.each_with_index do |image, i| %>
                   <div class="item <%= "active" if i.zero? %>" data-thumb=<%= i %>>
                     <%= image_tag image.attachment(:large) %>
@@ -59,7 +58,6 @@
           <div class="media-body">
             <ul class="list-inline">
               <li><a href="product_grid_left_sidebar.html"><i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る</a></li>
-              <!-- <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Share This</a></li> -->
             </ul>
             <h2><%= @product.name %></h2>
             <h3><%= @product.display_price %></h3>
@@ -74,7 +72,6 @@
             </span>
             <span class="quick-drop resizeWidth">
               <select name="guiest_id4" id="guiest_id4" class="select-drop">
-              <!--   <option value="0">Qty</option> -->
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
