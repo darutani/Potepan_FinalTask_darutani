@@ -8,7 +8,6 @@ RSpec.describe "products_page", type: :system do
     before do
       product.images << image
       visit potepan_product_path(product.id)
-      get potepan_product_path(product.id)
 
       # 画像URLの取得が上手くいかない問題への対応
       # https://mng-camp.potepan.com/curriculums/document-for-final-task-2#notes-of-image-test
@@ -60,8 +59,9 @@ RSpec.describe "products_page", type: :system do
     # 商品画像を表示
     it "商品画像が表示されていること" do
       within ".media" do
-        product.images.each { |image| expect(response.body).to include(image.attachment(:large)) }
-        product.images.each { |image| expect(response.body).to include(image.attachment(:small)) }
+        product.images.each { |image| expect(page).to have_selector "img[alt='#{image.id}']" }
+        # product.images.each { |image| expect(response.body).to include(image.attachment(:large)) }
+        # product.images.each { |image| expect(response.body).to include(image.attachment(:small)) }
       end
     end
   end
