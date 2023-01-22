@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-  #potepanにnamespaceするとページ表示時にエラーとなるためnamespaceせずに記載
-  # resources :products, only: [:show]
-
-mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platform'
+  mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platform'
   # This line mounts Solidus's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to Spree::ProductsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
@@ -11,10 +8,8 @@ mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platf
   # We ask that you don't use the :as option here, as Solidus relies on it being the default of "spree"
   mount Spree::Core::Engine, at: '/'
 
-  get '/potepan',                          to: 'potepan#home'
-
   namespace :potepan do
-    # get '/',                        to: 'sample#index'
+    get '/',                        to: 'sample#index'
     get 'index',                    to: 'sample#index'
     get :product_grid_left_sidebar, to: 'sample#product_grid_left_sidebar'
     get :product_list_left_sidebar, to: 'sample#product_list_left_sidebar'
@@ -33,6 +28,7 @@ mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platf
     get :privacy_policy,            to: 'sample#privacy_policy'
 
     resources :products, only: [:show]
+    # resources :categories, only: [:show]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
