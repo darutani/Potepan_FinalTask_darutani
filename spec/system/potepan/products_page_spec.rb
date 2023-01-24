@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "products_page", type: :system do
-  describe "課題提出フォーム" do
+  describe "商品詳細ページ" do
     let(:product) { create(:product) }
     let(:image) { create(:image) }
 
