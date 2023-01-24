@@ -60,8 +60,6 @@ RSpec.describe "products_page", type: :system do
     it "商品画像が表示されていること" do
       within ".media" do
         product.images.each { |image| expect(page).to have_selector "img[alt='#{image.id}']" }
-        # product.images.each { |image| expect(response.body).to include(image.attachment(:large)) }
-        # product.images.each { |image| expect(response.body).to include(image.attachment(:small)) }
       end
     end
   end

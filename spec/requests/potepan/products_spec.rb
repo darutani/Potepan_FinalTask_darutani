@@ -6,8 +6,8 @@ RSpec.describe "Potepna::Products", type: :request do
     let(:image) { create(:image) }
 
     before do
-      get potepan_product_path(product.id)
       product.images << image
+      get potepan_product_path(product.id)
 
       # 画像URLの取得が上手くいかない問題への対応
       # https://mng-camp.potepan.com/curriculums/document-for-final-task-2#notes-of-image-test
@@ -23,9 +23,6 @@ RSpec.describe "Potepna::Products", type: :request do
     it "正しい商品情報が取得できていること" do
       expect(response.body).to include product.name
       expect(response.body).to include product.price.to_s
-      
-      # binding.pry
-
       product.images.each { |image| expect(response.body).to include(image.attachment(:large)) }
       product.images.each { |image| expect(response.body).to include(image.attachment(:small)) }
     end
