@@ -16,7 +16,10 @@ RSpec.describe "products_page", type: :system do
       image.reload
     end
 
-    # homeページへ遷移
+    it "titleに商品名が表示されること" do
+      expect(page).to have_title "#{product.name} - BIGBAG Store"
+    end
+
     it "BIGBAGアイコンをクリックしてhomeページへ遷移すること" do
       click_on('logo')
       expect(current_path).to eq potepan_path
@@ -36,7 +39,6 @@ RSpec.describe "products_page", type: :system do
       end
     end
 
-    # 商品名を表示
     it "商品名が表示されること" do
       within ".page-title" do
         expect(page).to have_content product.name
@@ -49,7 +51,6 @@ RSpec.describe "products_page", type: :system do
       end
     end
 
-    # 商品価格を表示
     it "商品価格が表示されること" do
       within ".media-body" do
         expect(page).to have_content product.display_price
@@ -62,7 +63,6 @@ RSpec.describe "products_page", type: :system do
       end
     end
 
-    # 商品画像を表示
     it "商品画像が表示されていること" do
       within ".media" do
         product.images.each { |image| expect(page).to have_selector "img[alt='#{image.id}']" }
