@@ -28,6 +28,5 @@ RSpec.describe "Potepna::Products", type: :request do
       product.images.each { |image| expect(response.body).to include(image.attachment(:large)) }
       product.images.each { |image| expect(response.body).to include(image.attachment(:small)) }
     end
-
   end
 end
