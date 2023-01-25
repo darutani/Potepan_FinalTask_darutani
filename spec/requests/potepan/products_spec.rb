@@ -16,7 +16,7 @@ RSpec.describe "Potepna::Products", type: :request do
       image.reload
     end
 
-    it "商品の詳細画面を表示すること" do
+    it "正しいHTTPレスポンスを返すこと" do
       expect(response).to have_http_status(:success)
     end
 
