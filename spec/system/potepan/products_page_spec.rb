@@ -56,6 +56,12 @@ RSpec.describe "products_page", type: :system do
       end
     end
 
+    it "商品説明文が表示されること" do
+      within ".media-body" do
+        expect(page).to have_content product.description
+      end
+    end
+
     # 商品画像を表示
     it "商品画像が表示されていること" do
       within ".media" do

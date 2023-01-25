@@ -23,6 +23,7 @@ RSpec.describe "Potepna::Products", type: :request do
     it "正しい商品情報が取得できていること" do
       expect(response.body).to include product.name
       expect(response.body).to include product.price.to_s
+      expect(response.body).to include product.description
       product.images.each { |image| expect(response.body).to include(image.attachment(:large)) }
       product.images.each { |image| expect(response.body).to include(image.attachment(:small)) }
     end
