@@ -70,15 +70,20 @@ RSpec.describe "categories_page", type: :system do
     end
 
     it "各カテゴリーとブランドに紐づく商品の画像・商品名・価格が表示されること" do
-      within ".side-nav" do
-        expect(page).to have_content taxon_jackets.root.name
-        expect(page).to have_content taxon_jackets.name
-        expect(page).to have_content taxon_HTML.root.name
-        expect(page).to have_content taxon_HTML.name
+      within ".productBox" do
+        expect(page).to have_selector "img[alt='#{product.id}']"
+        expect(page).to have_content product.name
+        expect(page).to have_content product.display_price
       end
     end
 
     # 商品のリンクをクリックして、その商品詳細ページへ遷移すること
+    it "商品のリンクをクリックして、その商品詳細ページへ遷移すること" do
+      within ".productBox" do
+        click_on("#{product.name}")
+        expect(current_path).to eq potepan_product_path(product.id)
+      end
+    end
 
     # 【商品詳細ページのテストへ転記要】
     # 「一覧ページへ戻る」リンクをクリックして、その商品が属するカテゴリーページへ遷移すること

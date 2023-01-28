@@ -100,7 +100,7 @@
                   <div class="productBox">
                     <%= link_to potepan_product_path(product.id) do %>
                       <div class="productImage clearfix">
-                        <%= image_tag product.display_image.attachment(:small) %>
+                        <%= image_tag product.display_image.attachment(:small), alt: product.id %>
                       </div>
                       <div class="productCaption clearfix">
                         <h5><%= product.name %></h5>
@@ -117,7 +117,7 @@
                 <div class="productBox">
                   <%= link_to potepan_product_path(product.id) do %>
                     <div class="productImage clearfix">
-                      <%= image_tag product.display_image.attachment(:small) %>
+                      <%= image_tag product.display_image.attachment(:small), alt: product.id %>
                     </div>
                     <div class="productCaption clearfix">
                       <h5><%= product.name %></h5>
