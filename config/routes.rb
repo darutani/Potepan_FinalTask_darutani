@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platform'
+
+  mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platform'
   # This line mounts Solidus's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to Spree::ProductsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
@@ -25,6 +26,8 @@ mount SolidusPaypalCommercePlatform::Engine, at: '/solidus_paypal_commerce_platf
     get :about_us,                  to: 'sample#about_us'
     get :tokushoho,                 to: 'sample#tokushoho'
     get :privacy_policy,            to: 'sample#privacy_policy'
+
+    resources :products, only: [:show]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
