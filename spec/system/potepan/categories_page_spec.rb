@@ -2,13 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "categories_page", type: :system do
   describe "カテゴリーページ" do
-
-    let!(:taxonomy_categories) { create(:taxonomy, name: "Categories") }
-    let!(:taxonomy_brand) { create(:taxonomy) }
-    let!(:taxon_jackets) { create(:taxon, name: "jackets", taxonomy: taxonomy_categories, parent_id: taxonomy_categories.taxons.first.id) }
-    let!(:taxon_HTML) { create(:taxon, name: "HTML", taxonomy: taxonomy_brand, parent_id: taxonomy_brand.taxons.first.id) }
-    let!(:product) { create(:product, name: "potepan-jackets", taxons: [taxon_jackets]) }
-    let!(:image) { create(:image) }
+    let(:taxon_jackets) do
+      create(:taxon, name: "jackets", taxonomy: taxonomy_categories, parent_id: taxonomy_categories.taxons.first.id)
+    end
+    let!(:taxon_HTML) do
+      create(:taxon, name: "HTML", taxonomy: taxonomy_brand, parent_id: taxonomy_brand.taxons.first.id)
+    end
+    let(:taxonomy_categories) { create(:taxonomy, name: "Categories") }
+    let(:taxonomy_brand) { create(:taxonomy) }
+    let(:product) { create(:product, name: "potepan-jackets", taxons: [taxon_jackets]) }
+    let(:image) { create(:image) }
 
     before do
       product.images << image
@@ -77,16 +80,11 @@ RSpec.describe "categories_page", type: :system do
       end
     end
 
-    # 商品のリンクをクリックして、その商品詳細ページへ遷移すること
     it "商品のリンクをクリックして、その商品詳細ページへ遷移すること" do
       within ".productBox" do
         click_on("#{product.name}")
         expect(current_path).to eq potepan_product_path(product.id)
       end
     end
-
-    # 【商品詳細ページのテストへ転記要】
-    # 「一覧ページへ戻る」リンクをクリックして、その商品が属するカテゴリーページへ遷移すること
-
   end
 end
