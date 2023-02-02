@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Potepna::Categories", type: :request do
   describe "GET /show" do
     let(:taxon_jackets) do
-      create(:taxon, name: "jackets", taxonomy: taxonomy_categories, parent_id: taxonomy_categories.taxons.first.id)
+      create(:taxon, name: "jackets", taxonomy: taxonomy_categories, parent_id: taxonomy_categories.root.id)
     end
     let(:taxonomy_categories) { create(:taxonomy, name: "Categories") }
     let(:product) { create(:product, name: "potepan-jackets", taxons: [taxon_jackets]) }
@@ -28,6 +28,9 @@ RSpec.describe "Potepna::Categories", type: :request do
       expect(response.body).to include "#{taxon_jackets.name} - BIGBAG Store"
       expect(response.body).to include taxon_jackets.name
       expect(response.body).to include taxon_jackets.root.name
+    end
+
+    it "正しい商品情報が取得できていること" do
       expect(response.body).to include product.name
       expect(response.body).to include product.display_price.to_s
       expect(response.body).to include product.display_image.attachment(:small)
