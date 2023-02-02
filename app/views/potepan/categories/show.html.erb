@@ -11,7 +11,9 @@
               <ul class="nav navbar-nav side-nav">
                 <% @taxonomies.each do |taxonomy| %>
                   <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#taxonomy_<%= taxonomy.id %>"><%= taxonomy.name %><i class="fa fa-plus"></i></a>
+                    <%= link_to "javascript:;", data: { toggle: 'collapse', target: "#taxonomy_#{taxonomy.id}" } do %>
+                      <%= taxonomy.name %><i class="fa fa-plus"></i>
+                    <% end %>
                     <ul id="taxonomy_<%= taxonomy.id %>" class="collapse collapseItem">
                       <% taxonomy.taxons.leaves.each do |taxon| %>
                         <li>
