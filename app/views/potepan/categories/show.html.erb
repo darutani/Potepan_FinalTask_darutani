@@ -16,7 +16,7 @@
                       <% taxonomy.taxons.leaves.each do |taxon| %>
                         <li>
                           <%= link_to potepan_category_path(taxon.id) do %>
-                            <i class="fa fa-caret-right" aria-hidden="true"></i><%= taxon.name %> <span>(<%= taxon.products.size %>)</span>
+                            <i class="fa fa-caret-right" aria-hidden="true"></i><%= taxon.name %> <span>(<%= taxon.products.count %>)</span>
                           <% end %>
                         </li>
                       <% end %>
@@ -69,7 +69,6 @@
             </div>
           </div>
         </div>
-
         <div class="row">
           <% @products.each do |product| %>
             <div class="col-sm-4 col-xs-12">
