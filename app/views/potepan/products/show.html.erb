@@ -1,6 +1,5 @@
 <% content_for(:title,  @product.name) %>
-<%= render partial: "shared/light_section", locals: { title: @product } %>
-
+<%= render "shared/light_section", title_name: @product.name %>
 <section class="mainContent clearfix">
   <div class="container">
     <div class="row singleProduct">
