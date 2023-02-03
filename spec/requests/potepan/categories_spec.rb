@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "Potepna::Categories", type: :request do
   describe "GET /show" do
-    let(:taxon_jackets) do
-      create(:taxon, name: "jackets", taxonomy: taxonomy_categories, parent_id: taxonomy_categories.root.id)
+    let(:taxon_jacket) do
+      create(:taxon, name: "jacket", taxonomy: taxonomy_category, parent_id: taxonomy_category.root.id)
     end
-    let(:taxonomy_categories) { create(:taxonomy, name: "Categories") }
-    let(:product) { create(:product, name: "potepan-jackets", taxons: [taxon_jackets]) }
+    let(:taxonomy_category) { create(:taxonomy, name: "Categories") }
+    let(:product) { create(:product, name: "potepan-jacket", taxons: [taxon_jacket]) }
     let(:image) { create(:image) }
 
     before do
       product.images << image
-      get potepan_category_path(taxon_jackets.id)
+      get potepan_category_path(taxon_jacket.id)
 
       # 画像URLの取得が上手くいかない問題への対応
       # https://mng-camp.potepan.com/curriculums/document-for-final-task-2#notes-of-image-test
@@ -25,9 +25,9 @@ RSpec.describe "Potepna::Categories", type: :request do
     end
 
     it "正しいカテゴリー情報が取得できていること" do
-      expect(response.body).to include "#{taxon_jackets.name} - BIGBAG Store"
-      expect(response.body).to include taxon_jackets.name
-      expect(response.body).to include taxon_jackets.root.name
+      expect(response.body).to include "#{taxon_jacket.name} - BIGBAG Store"
+      expect(response.body).to include taxon_jacket.name
+      expect(response.body).to include taxon_jacket.root.name
     end
 
     it "正しい商品情報が取得できていること" do
