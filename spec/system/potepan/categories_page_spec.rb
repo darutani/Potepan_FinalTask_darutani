@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "categories_page", type: :system do
   describe "カテゴリーページ" do
     let(:taxon_jacket) do
-      create(:taxon, name: "jacket", taxonomy: taxonomy_category, parent_id: taxonomy_category.root.id)
+      create(:taxon, name: "jackets", taxonomy: taxonomy_category, parent_id: taxonomy_category.root.id)
     end
     let!(:taxon_html) do
       create(:taxon, name: "HTML", taxonomy: taxonomy_brand, parent_id: taxonomy_brand.root.id)
