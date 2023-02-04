@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Potepna::Products", type: :request do
   describe "GET /show" do
-    let(:product) { create(:product) }
+    let(:taxon) { create(:taxon) }
+    let(:product) { create(:product, taxons: [taxon]) }
     let(:image) { create(:image) }
 
     before do

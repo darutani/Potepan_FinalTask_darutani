@@ -1,23 +1,5 @@
 <% content_for(:title,  @product.name) %>
-<section class="lightSection clearfix pageHeader">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="page-title">
-          <h2><%= @product.name %></h2>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <ol class="breadcrumb pull-right">
-          <li>
-            <%= link_to "Home", potepan_path %>
-          </li>
-          <li class="active"><%= @product.name %></li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
+<%= render "shared/light_section", title_name: @product.name %>
 <section class="mainContent clearfix">
   <div class="container">
     <div class="row singleProduct">
@@ -52,9 +34,9 @@
             </div>
           </div>
           <div class="media-body">
-            <ul class="list-inline">
+            <ul class="list-inline list-page">
               <li>
-                <%= link_to potepan_product_grid_left_sidebar_path do %>
+                <%= link_to potepan_category_path(@product.taxons.first.id) do %>
                   <i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る
                 <% end %>
               </li>

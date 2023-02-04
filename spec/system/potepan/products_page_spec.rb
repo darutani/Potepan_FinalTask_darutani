@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "products_page", type: :system do
   describe "商品詳細ページ" do
-    let(:product) { create(:product) }
+    let(:taxon) { create(:taxon) }
+    let(:product) { create(:product, taxons: [taxon]) }
     let(:image) { create(:image) }
 
     before do
@@ -36,6 +37,13 @@ RSpec.describe "products_page", type: :system do
       within ".breadcrumb" do
         click_on('Home')
         expect(current_path).to eq potepan_path
+      end
+    end
+
+    it "「一覧ページへ戻る」リンクをクリックしてカテゴリーページへ遷移すること" do
+      within ".list-page" do
+        click_on('一覧ページへ戻る')
+        expect(current_path).to eq potepan_category_path(product.taxons.first.id)
       end
     end
 

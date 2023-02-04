@@ -1,5 +1,5 @@
 class Potepan::ProductsController < ApplicationController
   def show
-    @product = Spree::Product.find(params[:id])
+    @product = Spree::Product.includes(master: [images: { attachment_attachment: :blob }]).find(params[:id])
   end
 end
