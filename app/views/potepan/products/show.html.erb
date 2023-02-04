@@ -76,13 +76,15 @@
       <% @related_products.each do |related_product| %>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="productBox">
-            <div class="productImage clearfix">
-              <%= image_tag related_product.display_image.attachment(:small), alt: "products-img" %>
-            </div>
-            <div class="productCaption clearfix">
-              <h5><%= related_product.name %></h5>
-              <h3><%= related_product.display_price %></h3>
-            </div>
+            <%= link_to potepan_product_path(related_product.id) do %>
+              <div class="productImage clearfix">
+                <%= image_tag related_product.display_image.attachment(:small), alt: "products-img" %>
+              </div>
+              <div class="productCaption clearfix">
+                <h5><%= related_product.name %></h5>
+                <h3><%= related_product.display_price %></h3>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
