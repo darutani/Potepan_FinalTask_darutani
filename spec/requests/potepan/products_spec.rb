@@ -58,7 +58,7 @@ RSpec.describe "Potepna::Products", type: :request do
     end
 
     it "関連商品の正しい商品情報が取得できていること" do
-      within ".related-product" do
+      within ".productsContent" do
         expect(response.body).to include product_jacket_1.name
         expect(response.body).to include product_jacket_1.price.to_s
         expect(response.body).to include(product_jacket_1.display_image.attachment(:small))

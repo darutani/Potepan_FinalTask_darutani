@@ -105,7 +105,7 @@ RSpec.describe "products_page", type: :system do
     end
 
     it "表示されている商品と同じカテゴリー・ブランドの全商品の商品名・価格・画像が表示されていること" do
-      within ".related-product" do
+      within ".productsContent" do
         expect(page).to have_content product_jacket_2.name
         expect(page).to have_content product_jacket_2.display_price
         expect(page).to have_selector "img[alt='products-img-#{product_jacket_2.id}']"
@@ -116,7 +116,7 @@ RSpec.describe "products_page", type: :system do
     end
 
     it "表示されている商品とカテゴリー・ブランド両方とも異なる商品の商品名・価格・画像が表示されていないこと" do
-      within ".related-product" do
+      within ".productsContent" do
         expect(page).to have_no_content product_hat_2.name
         expect(page).to have_no_content product_hat_2.display_price
         expect(page).to have_no_selector "img[alt='products-img-#{product_hat_2.id}']"
@@ -124,7 +124,7 @@ RSpec.describe "products_page", type: :system do
     end
 
     it "関連商品のリンクをクリックして、その商品詳細ページへ遷移すること" do
-      within ".related-product" do
+      within ".productsContent" do
         click_on(product_jacket_2.name)
         expect(current_path).to eq potepan_product_path(product_jacket_2.id)
       end
