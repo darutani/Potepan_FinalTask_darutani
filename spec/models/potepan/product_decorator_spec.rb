@@ -18,7 +18,7 @@ RSpec.describe Potepan::ProductDecorator, type: :model do
     end
 
     it "商品オブジェクトが重複しないこと" do
-      expect(product_1.related_products).to eq product_1.related_products.distinct
+      expect(product_1.related_products).to eq [product_2, product_3]
     end
   end
 end
