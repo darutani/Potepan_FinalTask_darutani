@@ -79,14 +79,14 @@ RSpec.describe "products_page", type: :system do
   end
 
   describe "商品詳細ページの関連商品欄(.productsContent部分)" do
-    let(:taxon_jacket) { create(:taxon, name: "jackets") }
-    let(:taxon_hat) { create(:taxon, name: "hats") }
-    let(:taxon_html) { create(:taxon, name: "HTML") }
-    let(:taxon_css) { create(:taxon, name: "CSS") }
-    let(:product_jacket_1) { create(:product, name: "potepan-jacket-1", taxons: [taxon_jacket, taxon_html]) }
-    let(:product_jacket_2) { create(:product, name: "potepan-jacket-2", price: "20.99", taxons: [taxon_jacket, taxon_css]) }
-    let(:product_hat_1) { create(:product, name: "potepan-hat-1", price: "30.99", taxons: [taxon_hat, taxon_html]) }
-    let(:product_hat_2) { create(:product, name: "potepan-hat-2", price: "40.99", taxons: [taxon_hat, taxon_css]) }
+    let(:taxon_jacket) { create(:taxon) }
+    let(:taxon_hat) { create(:taxon) }
+    let(:taxon_html) { create(:taxon) }
+    let(:taxon_css) { create(:taxon) }
+    let(:product_jacket_1) { create(:product, taxons: [taxon_jacket, taxon_html]) }
+    let(:product_jacket_2) { create(:product, price: "20.99", taxons: [taxon_jacket, taxon_css]) }
+    let(:product_hat_1) { create(:product, price: "30.99", taxons: [taxon_hat, taxon_html]) }
+    let(:product_hat_2) { create(:product, price: "40.99", taxons: [taxon_hat, taxon_css]) }
     let(:image_1) { create(:image) }
     let(:image_2) { create(:image) }
     let(:image_3) { create(:image) }
