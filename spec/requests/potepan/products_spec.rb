@@ -34,13 +34,13 @@ RSpec.describe "Potepna::Products", type: :request do
   describe "GET /showの関連商品欄(.productsContent部分)" do
     let(:taxon) { create(:taxon) }
     let(:product) { create(:product, taxons: [taxon]) }
-    let(:products_related) { create_list(:product, 5, taxons: [taxon]) }
+    let(:related_products) { create_list(:product, 5, taxons: [taxon]) }
     let(:image) { create(:image) }
 
     before do
       product.images << image
-      products_related.each do |product_related|
-        product_related.images << create(:image)
+      related_products.each do |related_product|
+        related_product.images << create(:image)
       end
       get potepan_product_path(product.id)
 
@@ -50,16 +50,16 @@ RSpec.describe "Potepna::Products", type: :request do
     end
 
     it "関連商品の正しい商品情報が取得できていること" do
-      products_related.first(4).each do |product_related|
-        expect(response.body).to include product_related.name
-        expect(response.body).to include product_related.display_price.to_s
-        expect(response.body).to include product_related.display_image.attachment(:small)
+      related_products.first(4).each do |related_product|
+        expect(response.body).to include related_product.name
+        expect(response.body).to include related_product.display_price.to_s
+        expect(response.body).to include related_product.display_image.attachment(:small)
       end
     end
 
     it "５つ目の関連商品が表示されていないこと（関連商品の表示が最大４つであること）" do
-      expect(response.body).not_to include products_related.last.name
-      expect(response.body).not_to include products_related.last.display_image.attachment(:small)
+      expect(response.body).not_to include related_products.last.name
+      expect(response.body).not_to include related_products.last.display_image.attachment(:small)
     end
   end
 end
