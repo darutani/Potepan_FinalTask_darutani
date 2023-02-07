@@ -34,7 +34,14 @@ RSpec.describe "Potepna::Products", type: :request do
   describe "GET /showの関連商品欄(.productsContent部分)" do
     let(:taxon) { create(:taxon) }
     let(:product) { create(:product, taxons: [taxon]) }
-    let(:related_products) { create_list(:product, 5, taxons: [taxon]) }
+    # rubocop:disable Style/BlockDelimiters
+    let(:related_products) {
+      create_list(:product, 5, taxons: [taxon]) do |product, i|
+        product.price = i
+        product.save
+      end
+    }
+    # rubocop:enable Style/BlockDelimiters
     let(:image) { create(:image) }
 
     before do
