@@ -87,21 +87,13 @@ RSpec.describe "products_page", type: :system do
     let(:product_jacket_2) { create(:product, price: "20.99", taxons: [taxon_jacket, taxon_css]) }
     let(:product_hat_1) { create(:product, price: "30.99", taxons: [taxon_hat, taxon_html]) }
     let(:product_hat_2) { create(:product, price: "40.99", taxons: [taxon_hat, taxon_css]) }
-    let(:image_1) { create(:image) }
-    let(:image_2) { create(:image) }
-    let(:image_3) { create(:image) }
-    let(:image_4) { create(:image) }
 
     before do
-      product_jacket_1.images << image_1
-      product_jacket_2.images << image_2
-      product_hat_1.images << image_3
-      product_hat_2.images << image_4
+      product_jacket_1.images << create(:image)
+      product_jacket_2.images << create(:image)
+      product_hat_1.images << create(:image)
+      product_hat_2.images << create(:image)
       visit potepan_product_path(product_jacket_1.id)
-
-      # 画像URLの取得が上手くいかない問題への対応
-      # https://mng-camp.potepan.com/curriculums/document-for-final-task-2#notes-of-image-test
-      ActiveStorage::Current.host = page.current_host
     end
 
     it "表示されている商品と同じカテゴリー・ブランドの全商品の商品名・価格・画像が表示されていること" do
