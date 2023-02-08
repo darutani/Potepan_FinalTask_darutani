@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "products_page", type: :system do
-  describe "商品詳細ページ" do
+  describe "商品詳細ページのメイン部分(.singleproduct部分)" do
     let(:taxon) { create(:taxon) }
     let(:product) { create(:product, taxons: [taxon]) }
     let(:image) { create(:image) }
@@ -74,6 +74,51 @@ RSpec.describe "products_page", type: :system do
     it "商品画像が表示されていること" do
       within ".media" do
         product.images.each { |image| expect(page).to have_selector "img[alt='#{image.id}']" }
+      end
+    end
+  end
+
+  describe "商品詳細ページの関連商品欄(.productsContent部分)" do
+    let(:taxon_jacket) { create(:taxon) }
+    let(:taxon_hat) { create(:taxon) }
+    let(:taxon_html) { create(:taxon) }
+    let(:taxon_css) { create(:taxon) }
+    let(:product_jacket_1) { create(:product, taxons: [taxon_jacket, taxon_html]) }
+    let(:product_jacket_2) { create(:product, price: "20.99", taxons: [taxon_jacket, taxon_css]) }
+    let(:product_hat_1) { create(:product, price: "30.99", taxons: [taxon_hat, taxon_html]) }
+    let(:product_hat_2) { create(:product, price: "40.99", taxons: [taxon_hat, taxon_css]) }
+
+    before do
+      product_jacket_1.images << create(:image)
+      product_jacket_2.images << create(:image)
+      product_hat_1.images << create(:image)
+      product_hat_2.images << create(:image)
+      visit potepan_product_path(product_jacket_1.id)
+    end
+
+    it "表示されている商品と同じカテゴリー・ブランドの全商品の商品名・価格・画像が表示されていること" do
+      within ".productsContent" do
+        expect(page).to have_content product_jacket_2.name
+        expect(page).to have_content product_jacket_2.display_price
+        expect(page).to have_selector "img[alt='products-img-#{product_jacket_2.id}']"
+        expect(page).to have_content product_hat_1.name
+        expect(page).to have_content product_hat_1.display_price
+        expect(page).to have_selector "img[alt='products-img-#{product_hat_1.id}']"
+      end
+    end
+
+    it "表示されている商品とカテゴリー・ブランド両方とも異なる商品の商品名・価格・画像が表示されていないこと" do
+      within ".productsContent" do
+        expect(page).to have_no_content product_hat_2.name
+        expect(page).to have_no_content product_hat_2.display_price
+        expect(page).to have_no_selector "img[alt='products-img-#{product_hat_2.id}']"
+      end
+    end
+
+    it "関連商品のリンクをクリックして、その商品詳細ページへ遷移すること" do
+      within ".productsContent" do
+        click_on(product_jacket_2.name)
+        expect(current_path).to eq potepan_product_path(product_jacket_2.id)
       end
     end
   end
